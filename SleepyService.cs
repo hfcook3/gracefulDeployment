@@ -24,6 +24,12 @@ public class SleepyService : IHostedService, IDisposable
     public async Task StopAsync(CancellationToken cancellationToken)
     {
         Dispose();
+        System.Console.WriteLine("Waiting for sleepy task to wake up so we can fully exit...");
+        if (_sleepTask != null)
+        {
+            await _sleepTask;
+        }
+        System.Console.WriteLine("Sleepy task has awoken! Getting out.");
     }
 
     public void Dispose()
